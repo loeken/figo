@@ -8,7 +8,10 @@ import (
 
 func main() {
 	app := fiber.New()
-	db := connector.Connect()
+	// switch to sqlite
+	db := connector.ConnectSqlite()
+	// switch to mysql
+	// db := connector.ConnectMysql()
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.JSON(map[string]string{
@@ -17,6 +20,7 @@ func main() {
 	})
 
 	route.Releases(app, db)
+	route.Content(app, db)
 	app.Listen(":3000")
 
 }

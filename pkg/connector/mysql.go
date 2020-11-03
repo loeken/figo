@@ -9,8 +9,8 @@ import (
 	"gorm.io/gorm"
 )
 
-// Connect to the database
-func Connect() *gorm.DB {
+// ConnectMysql to the database
+func ConnectMysql() *gorm.DB {
 	dbName := os.Getenv("DB_NAME")
 	dbUser := os.Getenv("DB_USER")
 	dbPass := os.Getenv("DB_PASS")
@@ -34,4 +34,5 @@ func Connect() *gorm.DB {
 // Migrate tables
 func Migrate(db *gorm.DB) {
 	db.Migrator().AutoMigrate(&entity.Release{})
+	db.Migrator().AutoMigrate(&entity.Content{})
 }
